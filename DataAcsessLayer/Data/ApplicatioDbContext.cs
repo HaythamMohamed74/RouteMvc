@@ -13,18 +13,22 @@ namespace DataAcsessLayer.Data
     public class ApplicatioDbContext:DbContext
     {
 
-        public DbSet<Department> Departments { get; set; }
 
-
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public ApplicatioDbContext(DbContextOptions<ApplicatioDbContext>options):base(options)
         {
-            optionsBuilder.UseSqlServer("Data Source=DESKTOP-662AKIO\\SQLEXPRESS;Initial Catalog=MVCApplication;Integrated Security=True;Trust Server Certificate=True;");
+            
         }
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer("Data Source=DESKTOP-662AKIO\\SQLEXPRESS;Initial Catalog=MVCApplication;Integrated Security=True;Trust Server Certificate=True;");
+        //}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
+        public DbSet<Department> Departments { get; set; }
+
     }
 
 }
