@@ -16,6 +16,7 @@ namespace DataAcsessLayer.Data.Configurations
             builder.Property(d => d.Id).UseIdentityColumn(1,1);
             builder.Property(d => d.Name).HasColumnType("nvarchar").HasMaxLength(50).IsRequired();
             builder.Property(d => d.Code).HasColumnType("nvarchar").HasMaxLength(100).IsRequired();
+            builder.Property(d => d.CreatedAt).HasDefaultValueSql("GETDATE()");
 
         }
     }
