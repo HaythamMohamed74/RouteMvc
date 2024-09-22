@@ -1,16 +1,25 @@
+using DataAcsessLayer.Data;
+using Microsoft.EntityFrameworkCore;
+using RepositoryLayer.Interfaces;
+using RepositoryLayer.Repositories;
+
 namespace PresentationLayer
 {
     public class Program
     {
         public static void Main(string[] args)
         {
+
+
             var builder = WebApplication.CreateBuilder(args);
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
+            builder.Services.AddDbContext<ApplicatioDbContext>(optionsAction: (op) =>
+            op.UseSqlServer(connectionString));
+            builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             var app = builder.Build();
-
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
