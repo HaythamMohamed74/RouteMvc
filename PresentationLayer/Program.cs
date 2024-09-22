@@ -1,5 +1,7 @@
 using DataAcsessLayer.Data;
 using Microsoft.EntityFrameworkCore;
+using RepositoryLayer.Interfaces;
+using RepositoryLayer.Repositories;
 
 namespace PresentationLayer
 {
@@ -16,8 +18,8 @@ namespace PresentationLayer
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<ApplicatioDbContext>(optionsAction: (op) =>
             op.UseSqlServer(connectionString));
+            builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             var app = builder.Build();
-
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
